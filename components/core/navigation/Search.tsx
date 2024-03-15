@@ -1,7 +1,6 @@
 'use client'
 
 import { config } from '@/extra/config'
-import { DolarType } from '@/types/includes'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Search() {

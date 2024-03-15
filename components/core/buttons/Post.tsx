@@ -1,7 +1,7 @@
 'use client'
 
 import { config } from '@/extra/config'
-import { DolarType, PublishType } from '@/types/includes'
+import { PublishType } from '@/types/includes'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { BsPlus } from 'react-icons/bs'
