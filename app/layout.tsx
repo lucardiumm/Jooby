@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] })
 const roboto = Roboto({ subsets: ["latin"], weight: '500' })
 
 export const metadata: Metadata = {
-  title: 'Jooby',
+  title: 'Jooble',
   description: 'Consegui el puesto de trabajo de tus sueños en las mejores empresas!',
 };
 
