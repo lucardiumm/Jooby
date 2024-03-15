@@ -8,19 +8,27 @@ import { Drawer } from 'vaul'
 import { FaLink } from 'react-icons/fa6'
 import { useRouter } from 'next/navigation'
 import { useCopyToClipboard } from 'usehooks-ts'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
 
 export default function Job({ title, image, description, remote, location, name, link }: JobType) {
     const [opened, setOpened] = useState(false)
     const [copiedText, copy] = useCopyToClipboard()
 
-    const router = useRouter()
-
     const buttonRef = useRef<HTMLButtonElement>(null)
+
+    const Press = async () => {
+        // toast('Copied link to clipboard!', {
+        //     type: 'success',
+        // })
+        copy(link)
+        buttonRef.current?.click()
+    }
 
     return (
         <>  
-            <li onClick={() => buttonRef.current?.click()} className={'flex overflow-auto my-5 border-2 border-[#f3f3f4] w-5/6 md:w-4/6 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
-                {title} | {location}
+            <li onClick={Press} className={'flex text-center overflow-auto my-5 border-2 border-[#f3f3f4] w-5/6 md:w-4/6 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
+                {title}
             </li>
 
             <Drawer.Root>
@@ -38,6 +46,8 @@ export default function Job({ title, image, description, remote, location, name,
                     </Drawer.Content>
                 </Drawer.Portal>
             </Drawer.Root>
+
+            <ToastContainer autoClose={3000} hideProgressBar theme={'colored'} newestOnTop stacked />
         </>
     )
 }

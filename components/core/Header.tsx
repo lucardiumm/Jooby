@@ -19,10 +19,10 @@ export default function Header({ session }: PublishType) {
         <>
             <div className={'flex flex-col rounded-xl gap-5 items-center content-center justify-center bg-transparent'}>                
                 <h1 className={'text-[#3d3d4e] text-4xl md:text-7xl w-4/5 md:w-3/5 align-middle text-center'} style={source.style}>
-                    The #1 job board for graphic design jobs
+                    The #1 job board for software engineers
                 </h1>
                 <p className={'text-[#3d3d4e] w-4/5 md:w-3/5 align-middle text-center'} style={mona.style}>
-                    Jooble is the heart of the design community and the best resource to discover and connect with designers and jobs worldwide.
+                    Jooby is the head of the software community and the best resource to discover and connect with engineers and jobs worldwide.
                 </p>
 
                 <Post session={session} />
