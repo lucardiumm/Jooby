@@ -19,6 +19,7 @@ const config = {
     },
     extend: {
       colors: {
+        feather: '#58cc02',
         mee: '#19C9FF',
         dark: '#0d0c22',
         light: '#e7e7e9',

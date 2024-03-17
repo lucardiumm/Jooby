@@ -12,16 +12,16 @@ export default function Grid() {
         const response = await axios.post('/api/all')
         
         if (response.status === 200) {
-            response.data.jobs.forEach((item) => {
+            response.data.notes.forEach((item) => {
                 console.log(item)
 
                 setNotes([...notes, {
                     title: item.title,
-                    description: item.description,
+                    description: item.content,
                     remote: item.remote,
                     location: item.location,
                     name: '',  // item.user.name,
-                    link: item.link,
+                    link: item.link,    
                     image: '', // item.user.image,
                 }])
             })
