@@ -5,6 +5,8 @@ import { BsPlus } from 'react-icons/bs'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { PublishType } from '@/types/includes'
+import { UploadDropzone } from '@/utils/uploadthing'
+import { ClientUploadedFileData } from 'uploadthing/types'
 
 export default function Form({ session }: PublishType) {
     const [title, setTitle] = useState('')
@@ -35,16 +37,33 @@ export default function Form({ session }: PublishType) {
     return (
         <ul className={'items-center content-center justify-center flex flex-col list-none overflow-y-scroll'}>
             <li className={'my-2'}>
-                <input placeholder={'Title'} minLength={5} maxLength={50} type={'text'} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={title} onChange={(e) => setTitle(e.target.value)}  />
+                <input placeholder={'Titulo'} minLength={5} maxLength={50} type={'text'} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={title} onChange={(e) => setTitle(e.target.value)}  />
             </li>
             <li className={'my-2'}>
-                <input placeholder={'Link'} inputMode={'url'} type={'url'} minLength={5} maxLength={50} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={link} onChange={(e) => setLink(e.target.value)}  />
-            </li>
-            <li className={'my-2'}>
-                <textarea placeholder={'Job description'} minLength={200} maxLength={5000} className={'border-2 border-b-4 my-5 outline-none p-3 border-light rounded-xl bg-white w-72 resize-none text-dark font-medium text-sm h-60 md:w-80'} value={description} onChange={(e) => setDescription(e.target.value)} spellCheck={true} />
-            </li>
-            <li className={'my-2'}>
-                <input placeholder={'Location'} type={'text'} minLength={5} maxLength={50} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={location} onChange={(e) => setLocation(e.target.value)}  />
+                <UploadDropzone
+                    // appearance={{
+                    //     label: {
+                    //         color: 'white'
+                    //     },
+                    //     uploadIcon: {
+                    //         color: 'white'
+                    //     },
+                    //     allowedContent: {
+                    //         color: 'white',
+                    //     },
+                    // }}
+                    className={'border-2 outline-none border-dotted rounded-2xl border-light w-72 h-40'}
+                    endpoint={'imageUploader'}
+                    onClientUploadComplete={(res) => {
+                        console.log(res)
+                    }}
+                    onUploadBegin={(fileName) => {
+                        console.log(fileName)
+                    }}
+                    onUploadError={(e) => {
+                        console.error(e.message)
+                    }}
+                />
             </li>
             <li className={'my-4'}>
                 <button onClick={Press} className={'flex text-white font-semibold shadow-mee w-32 flex-row h-12 rounded-full items-center content-center justify-center bg-mee'}>                

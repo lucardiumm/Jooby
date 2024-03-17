@@ -15,7 +15,7 @@ export default function Post({ session }: PublishType) {
             <div onClick={() => {
                 session ? router.push('/publish') : signIn('google')
             }} className={'flex text-white font-semibold shadow-mee w-32 flex-row h-12 cursor-pointer rounded-full items-center content-center justify-center bg-mee'}>                
-                <BsPlus className={'mr-2 font-semibold text-xl'} /> Post a job
+                <BsPlus className={'mr-2 font-semibold text-xl'} /> Publicar
             </div>
         </>
     )

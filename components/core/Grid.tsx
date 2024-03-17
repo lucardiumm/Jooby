@@ -3,10 +3,10 @@
 import { config } from '@/extra/config'
 import { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import Job from '@/components/core/Job'
+import Note from '@/components/core/Note'
 
 export default function Grid() {
-    const [jobs, setJobs] = useState<any>([])
+    const [notes, setNotes] = useState<any>([])
     
     const FetchJobs = async () => {
         const response = await axios.post('/api/all')
@@ -15,7 +15,7 @@ export default function Grid() {
             response.data.jobs.forEach((item) => {
                 console.log(item)
 
-                setJobs([...jobs, {
+                setNotes([...notes, {
                     title: item.title,
                     description: item.description,
                     remote: item.remote,
@@ -34,9 +34,9 @@ export default function Grid() {
 
     return (
         <>  
-            <ul className={'flex bg-transparent flex-col items-center content-center justify-center w-full h-80 md:w-3/6 overflow-auto'}>
-                {jobs.map(({ title, image, description, remote, location, name, link }, index) => (
-                    <Job title={title} image={image} description={description} link={link} remote={remote} location={location} name={name} key={index} />
+            <ul className={'flex bg-transparent flex-col items-center content-center justify-center w-full h-80 md:w-3/6 overflow-y-scroll'}>
+                {notes.map(({ title, image, description, remote, location, name, link }, index) => (
+                    <Note title={title} image={image} description={description} link={link} remote={remote} location={location} name={name} key={index} />
                 ))}
             </ul>
         </>

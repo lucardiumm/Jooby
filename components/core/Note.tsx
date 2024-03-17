@@ -11,7 +11,7 @@ import { useCopyToClipboard } from 'usehooks-ts'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
 
-export default function Job({ title, image, description, remote, location, name, link }: JobType) {
+export default function Note({ title, image, description, remote, location, name, link }: JobType) {
     const [opened, setOpened] = useState(false)
     const [copiedText, copy] = useCopyToClipboard()
 
@@ -27,7 +27,7 @@ export default function Job({ title, image, description, remote, location, name,
 
     return (
         <>  
-            <li onClick={Press} className={'flex text-center overflow-auto my-5 border-2 border-[#f3f3f4] w-5/6 md:w-4/6 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
+            <li onClick={Press} className={'flex text-center my-5 border-2 border-[#f3f3f4] w-5/6 md:w-4/6 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
                 {title}
             </li>
 

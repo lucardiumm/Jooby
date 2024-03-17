@@ -11,6 +11,7 @@
   "dependencies": {
     "@prisma/client": "^5.11.0",
     "@types/mercadopago": "^1.5.11",
+    "@uploadthing/react": "^6.4.0",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -27,6 +28,7 @@
     "socket.io-client": "^4.7.4",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
+    "uploadthing": "^6.6.0",
     "usehooks-ts": "^3.0.1",
     "vaul": "^0.9.0",
     "zod": "^3.22.4"

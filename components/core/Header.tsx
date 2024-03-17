@@ -19,10 +19,10 @@ export default function Header({ session }: PublishType) {
         <>
             <div className={'flex flex-col rounded-xl gap-5 items-center content-center justify-center bg-transparent'}>                
                 <h1 className={'text-[#3d3d4e] text-4xl md:text-7xl w-4/5 md:w-3/5 align-middle text-center'} style={source.style}>
-                    The #1 job board for software engineers
+                    El #1 sitio para compartir apuntes de ingenieria
                 </h1>
-                <p className={'text-[#3d3d4e] w-4/5 md:w-3/5 align-middle text-center'} style={mona.style}>
-                    Jooby is the head of the software community and the best resource to discover and connect with engineers and jobs worldwide.
+                <p className={'text-[#3d3d4e] w-5/5 mx-5 md:w-2/5 align-middle text-center'} style={mona.style}>
+                    Apuntecitos es el núcleo principal de la comunidad de estudiantes de ingeniería informática y el mejor recurso para descubrir las notas de otros estudiantes.
                 </p>
 
                 <Post session={session} />
