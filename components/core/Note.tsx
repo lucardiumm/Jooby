@@ -10,30 +10,13 @@ import { useCopyToClipboard } from 'usehooks-ts'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
 import Image from 'next/image'
+import Download from './buttons/Download'
 
 export default function Note({ title, image, description, remote, location, name, link }: JobType) {
     const buttonRef = useRef<HTMLButtonElement>(null)
 
     const Press = async () => {
         buttonRef.current?.click()
-    }
-
-    const Download = () => {
-        link.forEach(el => {
-            console.log(el)
-
-            fetch(el, {}).then((response) => {
-                return response.blob()
-            }).then((blob) => {
-                let blobUrl = URL.createObjectURL(blob)
-                let a = document.createElement('a')
-                a.download = el
-                a.href = blobUrl
-                document.body.appendChild(a)
-                a.click()
-                a.remove()
-            })
-        })
     }
 
     return (
@@ -53,11 +36,7 @@ export default function Note({ title, image, description, remote, location, name
                             <div className={'cursor-grab mx-auto w-12 h-1.5 flex-shrink-0 absolute top-5 rounded-full bg-zinc-300 mb-8'}></div>
 
                             <p className={'h-5/6 w-5/6 text-justify overflow-auto'}>{description}</p>
-                            <button onClick={() => {
-                                Download()
-                            }}>
-                                Download
-                            </button>
+                            <Download links={link} />
                         </div>
                     </Drawer.Content>
                 </Drawer.Portal>

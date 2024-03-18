@@ -13,3 +13,7 @@ export type JobType = {
 export type PublishType = {
     session: Session | null;
 }
+
+export type ButtonType = {
+    links: string[];
+}
