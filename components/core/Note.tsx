@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
+import Image from 'next/image'
 
 export default function Note({ title, image, description, remote, location, name, link }: JobType) {
     const buttonRef = useRef<HTMLButtonElement>(null)
@@ -17,10 +18,28 @@ export default function Note({ title, image, description, remote, location, name
         buttonRef.current?.click()
     }
 
+    const Download = () => {
+        link.forEach(el => {
+            console.log(el)
+
+            fetch(el, {}).then((response) => {
+                return response.blob()
+            }).then((blob) => {
+                let blobUrl = URL.createObjectURL(blob)
+                let a = document.createElement('a')
+                a.download = el
+                a.href = blobUrl
+                document.body.appendChild(a)
+                a.click()
+                a.remove()
+            })
+        })
+    }
+
     return (
         <>  
-            <li onClick={Press} className={'flex text-center my-5 border-2 border-[#f3f3f4] w-5/6 md:w-4/6 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
-                {title}
+            <li onClick={Press} className={'flex text-center my-5 border-2 border-[#f3f3f4] w-72 md:w-96 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
+                {title} | <Image src={image} alt={''} className={'w-6 h-6 mx-2 rounded-full'} width={300} height={300} /> {name}
             </li>
 
             <Drawer.Root>
@@ -34,6 +53,11 @@ export default function Note({ title, image, description, remote, location, name
                             <div className={'cursor-grab mx-auto w-12 h-1.5 flex-shrink-0 absolute top-5 rounded-full bg-zinc-300 mb-8'}></div>
 
                             <p className={'h-5/6 w-5/6 text-justify overflow-auto'}>{description}</p>
+                            <button onClick={() => {
+                                Download()
+                            }}>
+                                Download
+                            </button>
                         </div>
                     </Drawer.Content>
                 </Drawer.Portal>

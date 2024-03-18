@@ -6,23 +6,27 @@ import axios from 'axios'
 import Note from '@/components/core/Note'
 
 export default function Grid() {
+    const [index, setIndex] = useState(0)
     const [notes, setNotes] = useState<any>([])
     
     const FetchJobs = async () => {
         const response = await axios.post('/api/all')
         
         if (response.status === 200) {
+            setIndex(response.data.notes.length)
             response.data.notes.forEach((item) => {
                 console.log(item)
 
-                setNotes([...notes, {
+                setNotes(prevNotes => [...prevNotes, {
                     title: item.title,
+                    // carrera: item.author.carrera,
+                    // facultad: item.author.facultad,
                     description: item.content,
-                    remote: item.remote,
-                    location: item.location,
-                    name: '',  // item.user.name,
-                    link: item.link,    
-                    image: '', // item.user.image,
+                    remote: '',
+                    location: '',
+                    name: item.author.name,
+                    link: item.images,
+                    image: item.author.image,
                 }])
             })
         }
@@ -34,10 +38,10 @@ export default function Grid() {
 
     return (
         <>  
-            <ul className={'flex bg-transparent flex-col items-center content-center justify-center w-full h-80 md:w-3/6 overflow-y-scroll'}>
+            <ul className={'bg-transparent text-center flex-col h-80 w-auto overflow-y-auto items-center content-center justify-center'}>
                 {notes.map(({ title, image, description, remote, location, name, link }, index) => (
                     <Note title={title} image={image} description={description} link={link} remote={remote} location={location} name={name} key={index} />
-                ))}
+                )).slice(0, index)}
             </ul>
         </>
     )

@@ -35,6 +35,7 @@ export default function Form({ session }: PublishType) {
             'image/png': [],
             'image/jpeg': [],
             'image/jpg': [],
+            'application/octet-stream': ['.zip'],
         },
         disabled: accepted,
     })

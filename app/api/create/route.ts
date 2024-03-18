@@ -17,20 +17,27 @@ export async function POST(req: Request) {
         },
     })
 
+    const note = await prisma.note.create({
+        data: {
+            author: {
+                connect: {
+                    id: info?.id
+                }
+            },
+            title: title,
+            images: [],
+            content: description,
+        },
+    })
+    
     images.forEach(el => {
         cloudinary.uploader.upload(el, undefined, async (err, result) => {
-            await prisma.note.create({
+            await prisma.note.update({
+                where: {
+                    id: note.id,
+                },
                 data: {
-                    author: {
-                        connect: {
-                            id: info?.id
-                        }
-                    },
-                    title: title,
-                    images: [
-                        result?.url as string
-                    ],
-                    content: description,
+                    images: [...note.images, result?.url as string],
                 },
             })
         })
