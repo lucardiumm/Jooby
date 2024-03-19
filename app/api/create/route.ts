@@ -39,7 +39,7 @@ export async function POST(req: Request) {
                     id: note.id,
                 },
                 data: {
-                    images: [...note.images, ('https' + result?.url.slice(4, 100000))],
+                    images: [...note.images, 'https'.concat(result?.url.slice(4, 100000) as string)],
                 },
             })
         })
