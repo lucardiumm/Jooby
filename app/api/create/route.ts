@@ -31,7 +31,9 @@ export async function POST(req: Request) {
     })
     
     images.forEach(el => {
-        cloudinary.uploader.upload(el, undefined, async (err, result) => {
+        cloudinary.uploader.upload(el, {}, async (err, result) => {
+            console.log(result?.url)
+            
             await prisma.note.update({
                 where: {
                     id: note.id,
