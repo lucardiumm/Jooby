@@ -39,11 +39,13 @@ export async function POST(req: Request) {
                     id: note.id,
                 },
                 data: {
-                    images: [...note.images, 'https' + result?.url.slice(4, 100000) as string],
+                    images: [...note.images, ('https' + result?.url.slice(4, 100000))],
                 },
             })
         })
     })
+
+    console.log(note)
 
     return Response.json({}, {
         status: 200,
