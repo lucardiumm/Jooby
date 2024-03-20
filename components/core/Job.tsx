@@ -10,12 +10,16 @@ import { useCopyToClipboard } from 'usehooks-ts'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
 import Image from 'next/image'
-import Download from './buttons/Download'
+import Apply from './buttons/Apply'
 
 export default function Note({ title, image, description, remote, location, name, link }: JobType) {
     const buttonRef = useRef<HTMLButtonElement>(null)
-
+    
+    const [copiedText, copyToClipboard] = useCopyToClipboard()
+    
     const Press = async () => {
+        copyToClipboard(link)
+
         buttonRef.current?.click()
     }
 
@@ -36,7 +40,7 @@ export default function Note({ title, image, description, remote, location, name
                             <div className={'cursor-grab mx-auto w-12 h-1.5 flex-shrink-0 absolute top-5 rounded-full bg-zinc-300 mb-8'}></div>
 
                             <p className={'h-5/6 w-5/6 text-justify overflow-auto'}>{description}</p>
-                            <Download links={link} />
+                            <Apply link={link} />
                         </div>
                     </Drawer.Content>
                 </Drawer.Portal>

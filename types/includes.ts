@@ -7,7 +7,7 @@ export type JobType = {
     title: string;
     description: string;
     image: string;
-    link: string[];
+    link: string;
 }
 
 export type PublishType = {
@@ -15,5 +15,5 @@ export type PublishType = {
 }
 
 export type ButtonType = {
-    links: string[];
+    link: string;
 }

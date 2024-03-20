@@ -1,7 +1,7 @@
 import prisma from '@/db/connector'
 
 export async function POST(req: Request) {
-    const notes = await prisma.note.findMany({
+    const jobs = await prisma.job.findMany({
         include: {
             author: true,
         },
@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     })
 
     return Response.json({
-        notes: notes,
+        jobs: jobs,
     }, {
         status: 200,
     })

@@ -11,41 +11,21 @@ import { FaImage } from 'react-icons/fa6'
 
 export default function Form({ session }: PublishType) {
     const [title, setTitle] = useState('')
-    const [accepted, setAccepted] = useState(false)
+    const [location, setLocation] = useState('')
     const [description, setDescription] = useState('')
-    const [images, setImages] = useState<any>([])
-
-    const onDrop = useCallback((acceptedFiles) => {
-        acceptedFiles.forEach(el => {
-            var reader = new FileReader()
-            reader.readAsDataURL(el)
-            reader.onload = () => {
-                setImages([...images, reader.result?.toString()])
-            }
-        })
-
-        setAccepted(true)
-    }, [])
-
-    const { getRootProps, isDragActive, isDragAccept, getInputProps } = useDropzone({ 
-        onDrop,
-        maxFiles: 5,
-        multiple: true,
-        accept: {
-            'image/png': [],
-            'image/jpeg': [],
-            'image/jpg': [],
-            'application/octet-stream': ['.zip'],
-        },
-        disabled: accepted,
-    })
+    const [tags, setTags] = useState<string[]>()
+    const [link, setLink] = useState('')
+    const [remote, setRemote] = useState(false)
 
     const router = useRouter()
 
     const Press = async () => {
         const response = await axios.post('/api/create', {
             title: title,
-            images: images,
+            tags: tags,
+            location: location,
+            link: link,
+            remote: remote,
             description: description,
             email: session?.user?.email,
         })
@@ -58,18 +38,16 @@ export default function Form({ session }: PublishType) {
     return (
         <ul className={'items-center content-center justify-center flex flex-col list-none overflow-y-scroll'}>
             <li className={'my-2'}>
-                <input placeholder={'Titulo'} minLength={5} maxLength={50} type={'text'} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={title} onChange={(e) => setTitle(e.target.value)}  />
+                <input placeholder={'Titulo'} minLength={5} maxLength={50} type={'text'} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={title} onChange={(e) => setTitle(e.target.value)} />
             </li>
             <li className={'my-2'}>
-                <div 
-                    className={'border-2 items-center content-center justify-center flex outline-none border-dotted rounded-2xl border-light w-72 h-40'}
-                    {...getRootProps()}
-                >
-                    <input {...getInputProps()} />
-                    {
-                        accepted ? <IoIosCheckmark className={'text-feather text-2xl'} /> : <FaImage className={'text-2xl text-gray-400'} />
-                    }
-                </div>
+                <input placeholder={'Ubicacion'} minLength={5} maxLength={50} type={'text'} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={location} onChange={(e) => setLocation(e.target.value)} />
+            </li>
+            <li className={'my-2'}>
+                <textarea placeholder={'Descripcion'} minLength={300} maxLength={5000} value={description} onChange={(e) => setDescription(e.target.value)} className={'w-72 h-60 text-dark font-medium text-sm resize-none border-2 border-light outline-none border-b-4 rounded-xl p-3'}></textarea>
+            </li>
+            <li className={'my-2'}>
+                <input placeholder={'Link de la aplicacion'} minLength={5} maxLength={50} type={'text'} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={link} onChange={(e) => setLink(e.target.value)} />
             </li>
             <li className={'my-4'}>
                 <button onClick={Press} className={'flex text-white font-semibold shadow-mee w-32 flex-row h-12 rounded-full items-center content-center justify-center bg-mee'}>                

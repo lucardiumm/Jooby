@@ -10,8 +10,8 @@ const inter = Inter({ subsets: ['latin'] })
 const roboto = Roboto({ subsets: ['latin'], weight: '500' })
 
 export const metadata: Metadata = {
-  title: 'Apuntecitos',
-  description: 'Consegui los apuntes/resumenes con la ayuda de otros estudiantes de ingenieria!',
+  title: 'Jooby',
+  description: 'Jooby es el núcleo principal de la comunidad de estudiantes de ingeniería, aqui se postulan los mejores puestos de trabajo diariamente.',
 };
 
 export const viewport: Viewport = {
