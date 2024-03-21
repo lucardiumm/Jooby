@@ -15,9 +15,19 @@ const mona = localFont({
 })
 
 export default function Header({ session }: PublishType) {
+    const [divClassName, setDivClassName] = useState('flex flex-col rounded-xl mt-20 md:mt-5 gap-5 items-center content-center justify-center bg-transparent')
+
+    useEffect(() => {
+        if (!session) {
+            setDivClassName('flex flex-col rounded-xl mt-5 gap-5 items-center content-center justify-center bg-transparent')
+        } else {
+            setDivClassName('flex flex-col rounded-xl mt-20 md:mt-5 gap-5 items-center content-center justify-center bg-transparent')
+        }
+    }, [session])
+
     return (
         <>
-            <div className={'flex flex-col rounded-xl my-5 gap-5 items-center content-center justify-center bg-transparent'}>                
+            <div className={divClassName}>
                 <h1 className={'text-[#3d3d4e] text-5xl md:text-7xl w-4/5 md:w-3/5 align-middle text-center'} style={source.style}>
                     El sitio #1 para trabajos de ingeniería
                 </h1>
