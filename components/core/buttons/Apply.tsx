@@ -16,7 +16,7 @@ export default function Apply({ link }: ButtonType) {
 
     return (
         <>
-            <div onClick={Press} className={'flex text-white font-semibold shadow-mee w-32 flex-row h-12 cursor-pointer rounded-full items-center content-center justify-center bg-mee'}>                
+            <div onClick={Press} className={'flex text-white font-semibold shadow-mee w-32 flex-row h-12 absolute bottom-6 md:bottom-10 cursor-pointer rounded-full items-center content-center justify-center bg-mee'}>                
                 Aplicar
             </div>
         </>

@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
 import Image from 'next/image'
 import Apply from './buttons/Apply'
+import Markdown from 'react-markdown'
 
 export default function Note({ title, image, description, remote, location, name, link }: JobType) {
     const buttonRef = useRef<HTMLButtonElement>(null)
@@ -23,10 +24,12 @@ export default function Note({ title, image, description, remote, location, name
         buttonRef.current?.click()
     }
 
+    const spaceIndex = name.indexOf(' ')
+
     return (
         <>  
-            <li onClick={Press} className={'flex text-center my-5 border-2 border-[#f3f3f4] w-72 md:w-96 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
-                {title} | <Image src={image} alt={''} className={'w-6 h-6 mx-2 rounded-full'} width={300} height={300} /> {name}
+            <li onClick={Press} className={'flex cursor-pointer text-center my-5 border-2 border-[#f3f3f4] w-72 md:w-96 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
+                {title} | <Image src={image} alt={''} className={'w-6 h-6 mx-2 rounded-full'} width={300} height={300} /> {name.slice(0, spaceIndex)}
             </li>
 
             <Drawer.Root>
@@ -39,7 +42,7 @@ export default function Note({ title, image, description, remote, location, name
                         <div className={'p-4 bg-white overflow-auto w-full flex-1 rounded-t-[10px] flex flex-col items-center content-center justify-center'}>
                             <div className={'cursor-grab mx-auto w-12 h-1.5 flex-shrink-0 absolute top-5 rounded-full bg-zinc-300 mb-8'}></div>
 
-                            <p className={'h-5/6 w-5/6 text-justify overflow-auto'}>{description}</p>
+                            <Markdown className={'h-4/6 absolute top-20 w-5/6 text-justify overflow-auto'}>{description}</Markdown>
                             <Apply link={link} />
                         </div>
                     </Drawer.Content>

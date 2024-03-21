@@ -44,7 +44,7 @@ export default function Form({ session }: PublishType) {
                 <input placeholder={'Ubicacion'} minLength={5} maxLength={50} type={'text'} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={location} onChange={(e) => setLocation(e.target.value)} />
             </li>
             <li className={'my-2'}>
-                <textarea placeholder={'Descripcion'} minLength={300} maxLength={5000} value={description} onChange={(e) => setDescription(e.target.value)} className={'w-72 h-60 text-dark font-medium text-sm resize-none border-2 border-light outline-none border-b-4 rounded-xl p-3'}></textarea>
+                <textarea placeholder={'Descripcion'} minLength={300} maxLength={5000} value={description} onChange={(e) => setDescription(e.target.value)} className={'w-72 md:w-80 h-60 text-dark font-medium text-sm resize-none border-2 border-light outline-none border-b-4 rounded-xl p-3'}></textarea>
             </li>
             <li className={'my-2'}>
                 <input placeholder={'Link de la aplicacion'} minLength={5} maxLength={50} type={'text'} className={'border-2 outline-none p-3 border-light rounded-xl bg-white w-72 text-dark font-medium text-sm h-14 md:w-80'} value={link} onChange={(e) => setLink(e.target.value)} />
