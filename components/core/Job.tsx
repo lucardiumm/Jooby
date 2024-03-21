@@ -12,6 +12,7 @@ import 'react-toastify/ReactToastify.css'
 import Image from 'next/image'
 import Apply from './buttons/Apply'
 import Markdown from 'react-markdown'
+import './index.css'
 
 export default function Note({ title, image, description, remote, location, name, link }: JobType) {
     const buttonRef = useRef<HTMLButtonElement>(null)
@@ -42,7 +43,7 @@ export default function Note({ title, image, description, remote, location, name
                         <div className={'p-4 bg-white overflow-auto w-full flex-1 rounded-t-[10px] flex flex-col items-center content-center justify-center'}>
                             <div className={'cursor-grab mx-auto w-12 h-1.5 flex-shrink-0 absolute top-5 rounded-full bg-zinc-300 mb-8'}></div>
 
-                            <Markdown className={'h-4/6 absolute top-20 w-5/6 text-justify overflow-auto'}>{description}</Markdown>
+                            <Markdown className={'markdown h-4/6 absolute top-20 w-5/6 text-justify overflow-auto'}>{description}</Markdown>
                             <Apply link={link} />
                         </div>
                     </Drawer.Content>
