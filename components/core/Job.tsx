@@ -4,7 +4,7 @@ import { config } from '@/extra/config'
 import { JobType } from '@/types/includes'
 import { useEffect, useRef, useState } from 'react'
 import { Drawer } from 'vaul'
-import { FaLink } from 'react-icons/fa6'
+import { FaLink, FaLocationDot } from 'react-icons/fa6'
 import { useRouter } from 'next/navigation'
 import { useCopyToClipboard } from 'usehooks-ts'
 import { ToastContainer, toast } from 'react-toastify'
@@ -18,6 +18,9 @@ export default function Note({ title, image, description, remote, location, name
     const buttonRef = useRef<HTMLButtonElement>(null)
     
     const [copiedText, copyToClipboard] = useCopyToClipboard()
+    const [text, setText] = useState('')
+    const [finalTitle, setFinalTitle] = useState('')
+    const [remoteText, setRemoteText] = useState('')
     
     const Press = async () => {
         copyToClipboard(link)
@@ -27,6 +30,15 @@ export default function Note({ title, image, description, remote, location, name
 
     const spaceIndex = name.indexOf(' ')
 
+    useEffect(() => {
+        remote ? setRemoteText(' (Remote)') : setRemoteText(` (${location})`)
+
+        const titleUnConcat = title.concat(remoteText + '')
+        const fTitleUnConcat = '### ' + titleUnConcat
+
+        setText(fTitleUnConcat.concat('\n' + description))
+    }, [remote, description, title, remoteText, location])
+        
     return (
         <>  
             <li onClick={Press} className={'flex cursor-pointer text-center my-5 border-2 border-[#f3f3f4] w-72 md:w-96 h-28 flex-row rounded-xl items-center content-center justify-center bg-transparent'}>                
@@ -42,8 +54,10 @@ export default function Note({ title, image, description, remote, location, name
                     <Drawer.Content className={'outline-none bg-zinc-100 flex h-5/6 flex-col items-center content-center justify-center rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0'}>
                         <div className={'p-4 bg-white overflow-auto w-full flex-1 rounded-t-[10px] flex flex-col items-center content-center justify-center'}>
                             <div className={'cursor-grab mx-auto w-12 h-1.5 flex-shrink-0 absolute top-5 rounded-full bg-zinc-300 mb-8'}></div>
-
-                            <Markdown className={'markdown h-4/6 absolute top-20 w-5/6 text-justify overflow-auto'}>{description}</Markdown>
+                            
+                            <Markdown className={'markdown h-4/6 absolute top-20 w-5/6 text-justify overflow-auto'}>
+                                {text}
+                            </Markdown>
                             <Apply link={link} />
                         </div>
                     </Drawer.Content>
